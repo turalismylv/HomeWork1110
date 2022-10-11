@@ -3,12 +3,13 @@ CREATE DATABASE DemoApp
 USE DemoApp
 
 
+
 CREATE TABLE Users(
    Id int PRIMARY KEY IDENTITY(1,1),
    Name nvarchar(50) NOT NULL,
    Surname nvarchar(50) NOT NULL,
    Email nvarchar(50) UNIQUE,
-   RegistrationDate datetime CHECK('2022-10-11'>RegistrationDate) DEFAULT('2022-10-11'),
+   RegistrationDate datetime CHECK(GETDATE()>RegistrationDate) DEFAULT(GETDATE()),
    ContactNumber nvarchar(50) DEFAULT('+994000000000'),
    Age int CHECK(Age>18),
    Adress nvarchar(50)
@@ -26,7 +27,7 @@ CREATE TABLE Categories(
    Id int PRIMARY KEY IDENTITY(1,1),
    Name nvarchar(50) NOT NULL,
    Slug nvarchar(50) UNIQUE,
-   CreatedAt datetime CHECK('2022-10-11'>CreatedAt) DEFAULT('2022-10-11'),
+   CreatedAt datetime CHECK(GETDATE()>CreatedAt) DEFAULT(GETDATE()),
    IsActive bit
 )
 
@@ -37,3 +38,5 @@ VALUES('Test1','Test1','2022-10-10',1),
 	   
 SELECT Name, Surname,Email FROM Users	   
 SELECT Name,IsActive FROM Categories
+
+SELECT* FROM Users
